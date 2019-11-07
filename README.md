@@ -79,7 +79,9 @@ OpenGL的工作流程可概述为：
 		
 		//绘图
 		glDrawElements(GL_TRIANGLES, sizeof(index) / sizeof(GLuint), GL_UNSIGNED_INT, 0);
-		//绘图完毕，关闭缓冲区
+		//绘图完毕，禁用属性，关闭缓冲区
+		glDisableVertexAttribArray(0);
+		glDisableVertexAttribArray(1);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindVertexArray(0);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
