@@ -154,7 +154,7 @@ glBindBufferRange(GL_UNIFORM_BUFFER, 2, ubo,
 	2 * sizeof(glm::mat4), sizeof(GLfloat));
 glBindBuffer(GL_UNIFORM_BUFFER, 0);
 ```
-
+顶点着色器：
 ```cpp
 \#version 330 core
 
