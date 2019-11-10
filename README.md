@@ -151,12 +151,10 @@ glBindBufferRange(GL_UNIFORM_BUFFER, 1, ubo, 0, 2 * sizeof(glm::mat4));
 glBindBufferRange(GL_UNIFORM_BUFFER, 2, ubo,
 	2 * sizeof(glm::mat4), sizeof(GLfloat));
 glBindBuffer(GL_UNIFORM_BUFFER, 0);
-
 `
 
-
 `
-#version 330 core
+\#version 330 core
 
 layout (location = 0) in vec3 aPos;
 
@@ -184,7 +182,6 @@ void main()
 	gl_PointSize = pointSize;
 	Color = gl_Position;
 }
-
 `
 
 
