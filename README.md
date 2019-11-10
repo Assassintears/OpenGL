@@ -17,7 +17,7 @@ OpenGL的工作流程可概述为：
 1.8 渲染循环。在渲染循环体内，需要渲染哪个缓冲区数据就激活哪个缓冲区，并使用VAO解释缓冲区数据，使能相应的属性。
 
 ```cpp
-`//准备数据
+//准备数据
 	GLfloat vertex[][3] = {
 		{-1.0f, -1.0f, 0.0f},
 		{1.0f, -1.0f, 0.0f},
@@ -92,8 +92,6 @@ OpenGL的工作流程可概述为：
 		glfwPollEvents();
 	}
 	glfwDestroyWindow(window);
-	}
-	`
 ```
   
   **注意：**
@@ -125,7 +123,6 @@ OpenGL GLSL数据来源有两种：
 7. 把该着色器中的**uniform数据块**索引绑定到第5步创建的绑定点上--**glUniformBlockBinding**;
 
 ```cpp
-`
 GLuint ubo;
 glGenBuffers(1, &ubo);
 glBindBuffer(GL_UNIFORM_BUFFER, ubo);
@@ -156,11 +153,9 @@ glBindBufferRange(GL_UNIFORM_BUFFER, 1, ubo, 0, 2 * sizeof(glm::mat4));
 glBindBufferRange(GL_UNIFORM_BUFFER, 2, ubo,
 	2 * sizeof(glm::mat4), sizeof(GLfloat));
 glBindBuffer(GL_UNIFORM_BUFFER, 0);
-`
 ```
 
 ```cpp
-`
 \#version 330 core
 
 layout (location = 0) in vec3 aPos;
@@ -189,7 +184,6 @@ void main()
 	gl_PointSize = pointSize;
 	Color = gl_Position;
 }
-`
 ```
 
 
