@@ -191,8 +191,10 @@ void main()
 </br>
 OpenGL给模型贴图叫做纹理，本节只介绍简单的二维纹理贴图。纹理贴图的基本思路就是读取图片，然后把图片信息映射到模型上。这里关键在于如何把图片信息映射到模型上。纹理坐标在x和y轴上，范围为0到1之间（注意我们使用的是2D纹理图像）。使用纹理坐标获取纹理颜色叫做采样(Sampling)。纹理坐标起始于(0, 0)，也就是纹理图片的左下角，终始于(1, 1)，即纹理图片的右上角。下面的图片展示了我们是如何把纹理坐标映射到三角形上的。
 ![](https://learnopengl-cn.github.io/img/01/06/tex_coords.png)
-具体的纹理使用请参考：![Learn OpenGL](https://learnopengl-cn.github.io/01%20Getting%20started/06%20Textures/)
+具体的纹理使用请参考：</br>
+![Learn OpenGL](https://learnopengl-cn.github.io/01%20Getting%20started/06%20Textures/)</br>
 总结起来，纹理使用方式与uniform数据块的使用方式类似，如下图所示：
+![](https://github.com/Assassintears/OpenGL/blob/master/images/%E7%BA%B9%E7%90%86.png)</br>
 
  1. 创建纹理缓冲区：
  ```c++
