@@ -194,7 +194,7 @@ OpenGL给模型贴图叫做纹理，本节只介绍简单的二维纹理贴图�
 具体的纹理使用请参考：
 ![](https://learnopengl-cn.github.io/01%20Getting%20started/06%20Textures/)
 总结起来，纹理使用方式与uniform数据块的使用方式类似，如下图所示：
-![](https://github.com/Assassintears/OpenGL/blob/master/images/%E7%BA%B9%E7%90%86.png)
+![](https://raw.githubusercontent.com/Assassintears/OpenGL/master/images/%E7%BA%B9%E7%90%86.png)
 
  1. 创建纹理缓冲区：
  ```c++
