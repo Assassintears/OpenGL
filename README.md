@@ -186,7 +186,125 @@ void main()
 }
 ```
 
+***
+# 纹理
+</br>
+OpenGL给模型贴图叫做纹理，本节只介绍简单的二维纹理贴图。纹理贴图的基本思路就是读取图片，然后把图片信息映射到模型上。这里关键在于如何把图片信息映射到模型上。纹理坐标在x和y轴上，范围为0到1之间（注意我们使用的是2D纹理图像）。使用纹理坐标获取纹理颜色叫做采样(Sampling)。纹理坐标起始于(0, 0)，也就是纹理图片的左下角，终始于(1, 1)，即纹理图片的右上角。下面的图片展示了我们是如何把纹理坐标映射到三角形上的。
+![](https://learnopengl-cn.github.io/img/01/06/tex_coords.png)
+具体的纹理使用请参考：![Learn OpenGL](https://learnopengl-cn.github.io/01%20Getting%20started/06%20Textures/)
+总结起来，纹理使用方式与uniform数据块的使用方式类似，如下图所示：
 
+ 1. 创建纹理缓冲区：
+ ```c++
+ 	unsigned int textureID; 
+ 	glGenTextures(1, &textureID);
+ ```
+ 2. 复制图片数据到纹理缓冲区：
+ ```c++
+	 glBindTexture(GL_TEXTURE_2D, textureID); 
+ 	 glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);glGenerateMipmap(GL_TEXTURE_2D);//使能纹理多级渐远**
+ ```
+ 3. 设置纹理属性：
+ ```c++
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);//x方向环绕方式
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);//y方向含绕方式
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);//纹理插值，纹理过滤
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+```
+4. **绑定纹理**：一个模型可以有多个纹理贴图，需要显示的告诉OpenGL哪个缓冲区，哪个着色器中的采样器对应哪个纹理数据
+```c++
+	glUniform1i(glGetUniformLocation(shader.ID, "texture"), 0); // 采样器绑定到纹理单元0
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, texID);//缓冲区绑定到纹理单元0
+```
+
+
+纹理采样器用于从纹理缓冲区取纹理数据，定义在片元着色器中，如下所示：
+**纹理片元着色器**
+```c++
+#version 330 core
+out vec4 FragColor;
+in vec2 TexCoord;
+
+uniform sampler2D texture;
+
+void main()
+{
+	FragColor = texture2D(texture, TexCoord);
+}
+```
+
+**纹理顶点着色器**
+```c++
+#version 330 core
+layout (location = 0) in vec3 aPos;
+layout (location = 1) in vec2 aTexCoord;
+
+layout (std140) uniform Matrices
+{
+    mat4 projection;
+    mat4 model;
+};
+
+uniform mat4 view;
+
+out vec2 TexCoord;
+
+
+void main()
+{
+	gl_Position = projection * view * model * vec4(aPos, 1.0);
+	TexCoord = vec2(aTexCoord.x, aTexCoord.y);
+}
+```
+
+**模型顶点数据**
+```c++
+GLfloat vert[] = {
+		// Vertex data for face 0
+		-1.0f, -1.0f, 1.0f, 0.0f, 0.0f,  // v0 v0,v1,v2,v3不贴图
+		1.0f, -1.0f,  1.0f, 0.0f, 0.0f, // v1
+		-1.0f,  1.0f,  1.0f, 0.0f, 0.0f,  // v2
+		1.0f,  1.0f,  1.0f, 0.0f, 0.0f, // v3
+
+		// Vertex data for face 1
+		1.0f, -1.0f,  1.0f, 0.0f, 0.5f, // v4
+		1.0f, -1.0f, -1.0f, 0.33f, 0.5f, // v5
+		1.0f,  1.0f,  1.0f, 0.0f, 1.0f,  // v6
+		1.0f,  1.0f, -1.0f, 0.33f, 1.0f, // v7
+
+		// Vertex data for face 2
+		1.0f, -1.0f, -1.0f, 0.66f, 0.5f, // v8
+		-1.0f, -1.0f, -1.0f, 1.0f, 0.5f,  // v9
+		1.0f,  1.0f, -1.0f, 0.66f, 1.0f, // v10
+		-1.0f,  1.0f, -1.0f, 1.0f, 1.0f,  // v11
+
+		// Vertex data for face 3
+		-1.0f, -1.0f, -1.0f, 0.66f, 0.0f, // v12
+		-1.0f, -1.0f,  1.0f, 1.0f, 0.0f,  // v13
+		-1.0f,  1.0f, -1.0f, 0.66f, 0.5f, // v14
+		-1.0f,  1.0f,  1.0f, 1.0f, 0.5f,  // v15
+
+		// Vertex data for face 4
+		-1.0f, -1.0f, -1.0f, 0.33f, 0.0f, // v16
+		1.0f, -1.0f, -1.0f, 0.66f, 0.0f, // v17
+		-1.0f, -1.0f,  1.0f, 0.33f, 0.5f, // v18
+		1.0f, -1.0f,  1.0f, 0.66f, 0.5f, // v19
+
+		// Vertex data for face 5
+		-1.0f,  1.0f,  1.0f, 0.33f, 0.5f, // v20
+		1.0f,  1.0f,  1.0f, 0.66f, 0.5f, // v21
+		-1.0f,  1.0f, -1.0f, 0.33f, 1.0f, // v22
+		1.0f,  1.0f, -1.0f, 0.66f, 1.0f  // v23
+	};
+```
+
+**注意事项**
+ 1. 不同的面的交点的纹理坐标有可能不同。所以，每个面的顶点都要赋值纹理坐标；
+ 2. 若局部面不需要贴图，则形成该面的顶点的纹理坐标都是同一个数，即纹理采样器只能采样点，无法形成面纹理；
+ 
+
+		
 
 
 
