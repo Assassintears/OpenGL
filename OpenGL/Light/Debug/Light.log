@@ -1,0 +1,37 @@
+﻿  light.cpp
+C:\Users\John\source\repos\OpenGL\Light\light.cpp(129,11): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\John\source\repos\OpenGL\Light\light.cpp(130,11): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\John\source\repos\OpenGL\Light\light.cpp(137,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\John\source\repos\OpenGL\Light\light.cpp(138,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\John\source\repos\OpenGL\Light\light.cpp(139,11): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\John\source\repos\OpenGL\Light\light.cpp(140,11): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\John\source\repos\OpenGL\Light\light.cpp(149,28): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\John\source\repos\OpenGL\Light\light.cpp(285,22): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\John\source\repos\OpenGL\Light\light.cpp(474,22): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\John\source\repos\OpenGL\Light\light.cpp(497,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\John\source\repos\OpenGL\Light\light.cpp(498,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\John\source\repos\OpenGL\Light\light.cpp(650,22): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\John\source\repos\OpenGL\Light\light.cpp(672,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\John\source\repos\OpenGL\Light\light.cpp(673,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\John\source\repos\OpenGL\Light\light.cpp(826,22): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\John\source\repos\OpenGL\Light\light.cpp(848,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\John\source\repos\OpenGL\Light\light.cpp(849,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\John\source\repos\OpenGL\Light\light.cpp(1003,22): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\John\source\repos\OpenGL\Light\light.cpp(1024,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\John\source\repos\OpenGL\Light\light.cpp(1025,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\John\source\repos\OpenGL\Light\light.cpp(1032,21): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+C:\Users\John\source\repos\OpenGL\Light\light.cpp(1032,21): warning C4244:         with
+C:\Users\John\source\repos\OpenGL\Light\light.cpp(1032,21): warning C4244:         [
+C:\Users\John\source\repos\OpenGL\Light\light.cpp(1032,21): warning C4244:             T=float
+C:\Users\John\source\repos\OpenGL\Light\light.cpp(1032,21): warning C4244:         ]
+C:\Users\John\source\repos\OpenGL\Light\light.cpp(1033,21): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+C:\Users\John\source\repos\OpenGL\Light\light.cpp(1033,21): warning C4244:         with
+C:\Users\John\source\repos\OpenGL\Light\light.cpp(1033,21): warning C4244:         [
+C:\Users\John\source\repos\OpenGL\Light\light.cpp(1033,21): warning C4244:             T=float
+C:\Users\John\source\repos\OpenGL\Light\light.cpp(1033,21): warning C4244:         ]
+C:\Users\John\source\repos\OpenGL\Light\light.cpp(1034,21): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+C:\Users\John\source\repos\OpenGL\Light\light.cpp(1034,21): warning C4244:         with
+C:\Users\John\source\repos\OpenGL\Light\light.cpp(1034,21): warning C4244:         [
+C:\Users\John\source\repos\OpenGL\Light\light.cpp(1034,21): warning C4244:             T=float
+C:\Users\John\source\repos\OpenGL\Light\light.cpp(1034,21): warning C4244:         ]
+  Light.vcxproj -> C:\Users\John\source\repos\OpenGL\Debug\Light.exe

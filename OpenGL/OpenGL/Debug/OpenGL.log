@@ -1,0 +1,37 @@
+﻿  Main.cpp
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\shared\minwindef.h(130): warning C4005: “APIENTRY”: 宏重定义
+  c:\users\john\desktop\opengl\opengl\glad\glad\glad.h(32): note: 参见“APIENTRY”的前一个定义
+c:\users\john\desktop\opengl\opengl\main.cpp(294): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+c:\users\john\desktop\opengl\opengl\main.cpp(295): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+c:\users\john\desktop\opengl\opengl\main.cpp(329): warning C4305: “初始化”: 从“double”到“float”截断
+c:\users\john\desktop\opengl\opengl\main.cpp(336): warning C4305: “=”: 从“double”到“float”截断
+c:\users\john\desktop\opengl\opengl\main.cpp(342): warning C4305: “=”: 从“double”到“float”截断
+c:\users\john\desktop\opengl\opengl\main.cpp(346): warning C4305: “=”: 从“double”到“float”截断
+c:\users\john\desktop\opengl\opengl\main.cpp(668): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+c:\users\john\desktop\opengl\opengl\main.cpp(669): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+c:\users\john\desktop\opengl\opengl\main.cpp(767): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+c:\users\john\desktop\opengl\opengl\main.cpp(768): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+c:\users\john\desktop\opengl\opengl\main.cpp(849): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+c:\users\john\desktop\opengl\opengl\main.cpp(850): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+c:\users\john\desktop\opengl\opengl\main.cpp(1155): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+c:\users\john\desktop\opengl\opengl\main.cpp(1156): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+  glad.c
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\shared\minwindef.h(130): warning C4005: “APIENTRY”: 宏重定义
+  c:\users\john\desktop\opengl\opengl\glad\glad\glad.h(32): note: 参见“APIENTRY”的前一个定义
+glfw3.lib(context.obj) : warning LNK4099: 未找到 PDB“glfw.pdb”(使用“glfw3.lib(context.obj)”或在“C:\Users\john\Desktop\OpenGL\Debug\glfw.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+glfw3.lib(init.obj) : warning LNK4099: 未找到 PDB“glfw.pdb”(使用“glfw3.lib(init.obj)”或在“C:\Users\john\Desktop\OpenGL\Debug\glfw.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+glfw3.lib(input.obj) : warning LNK4099: 未找到 PDB“glfw.pdb”(使用“glfw3.lib(input.obj)”或在“C:\Users\john\Desktop\OpenGL\Debug\glfw.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+glfw3.lib(monitor.obj) : warning LNK4099: 未找到 PDB“glfw.pdb”(使用“glfw3.lib(monitor.obj)”或在“C:\Users\john\Desktop\OpenGL\Debug\glfw.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+glfw3.lib(vulkan.obj) : warning LNK4099: 未找到 PDB“glfw.pdb”(使用“glfw3.lib(vulkan.obj)”或在“C:\Users\john\Desktop\OpenGL\Debug\glfw.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+glfw3.lib(window.obj) : warning LNK4099: 未找到 PDB“glfw.pdb”(使用“glfw3.lib(window.obj)”或在“C:\Users\john\Desktop\OpenGL\Debug\glfw.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+glfw3.lib(win32_init.obj) : warning LNK4099: 未找到 PDB“glfw.pdb”(使用“glfw3.lib(win32_init.obj)”或在“C:\Users\john\Desktop\OpenGL\Debug\glfw.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+glfw3.lib(win32_joystick.obj) : warning LNK4099: 未找到 PDB“glfw.pdb”(使用“glfw3.lib(win32_joystick.obj)”或在“C:\Users\john\Desktop\OpenGL\Debug\glfw.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+glfw3.lib(win32_monitor.obj) : warning LNK4099: 未找到 PDB“glfw.pdb”(使用“glfw3.lib(win32_monitor.obj)”或在“C:\Users\john\Desktop\OpenGL\Debug\glfw.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+glfw3.lib(win32_time.obj) : warning LNK4099: 未找到 PDB“glfw.pdb”(使用“glfw3.lib(win32_time.obj)”或在“C:\Users\john\Desktop\OpenGL\Debug\glfw.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+glfw3.lib(win32_thread.obj) : warning LNK4099: 未找到 PDB“glfw.pdb”(使用“glfw3.lib(win32_thread.obj)”或在“C:\Users\john\Desktop\OpenGL\Debug\glfw.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+glfw3.lib(win32_window.obj) : warning LNK4099: 未找到 PDB“glfw.pdb”(使用“glfw3.lib(win32_window.obj)”或在“C:\Users\john\Desktop\OpenGL\Debug\glfw.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+glfw3.lib(wgl_context.obj) : warning LNK4099: 未找到 PDB“glfw.pdb”(使用“glfw3.lib(wgl_context.obj)”或在“C:\Users\john\Desktop\OpenGL\Debug\glfw.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+glfw3.lib(egl_context.obj) : warning LNK4099: 未找到 PDB“glfw.pdb”(使用“glfw3.lib(egl_context.obj)”或在“C:\Users\john\Desktop\OpenGL\Debug\glfw.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+glfw3.lib(osmesa_context.obj) : warning LNK4099: 未找到 PDB“glfw.pdb”(使用“glfw3.lib(osmesa_context.obj)”或在“C:\Users\john\Desktop\OpenGL\Debug\glfw.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+  OpenGL.vcxproj -> C:\Users\john\Desktop\OpenGL\Debug\OpenGL.exe
+  OpenGL.vcxproj -> C:\Users\john\Desktop\OpenGL\Debug\OpenGL.pdb (Partial PDB)
