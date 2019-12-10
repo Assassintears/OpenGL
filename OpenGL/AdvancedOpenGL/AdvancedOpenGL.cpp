@@ -26,6 +26,9 @@ struct Character {
 };
 std::map<GLchar, Character> Characters;
 
+//展示一个bug，OpenGL状态绑定错误会怎么样
+void classicBug(GLFWwindow* window);
+
 // settings
 const float SCR_WIDTH = 1280.0f;
 const float SCR_HEIGHT = 720.0f;
@@ -76,7 +79,8 @@ int main()
 	//glDepthFunc(GL_LESS);
 
 	//texture(window);
-	coorTexture(window);
+	//coorTexture(window);
+	classicBug(window);
 	return 0;
 }
 
@@ -104,6 +108,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 	// make sure the viewport matches the new window dimensions; note that width and 
 	// height will be significantly larger than specified on retina displays.
 	glViewport(0, 0, width, height);
+	std::cout << "宽度：" << width <<  "\n";
 }
 
 // glfw: whenever the mouse moves, this callback is called
@@ -510,9 +515,6 @@ void coorTexture(GLFWwindow* window)
 		glUniformMatrix4fv(glGetUniformLocation(charshader.ID, "projection"),
 			1, GL_FALSE, glm::value_ptr(pro));
 
-		/*glm::vec4 prondc = pro * glm::vec4(x, y, 0, 1);
-		std::cout << "ndcx = " << ndc[0] << " y = " << prondc[1] << "\n";*/
-		
 		RenderText(charshader, "50", x, y, 1, glm::vec3(1.0f, 0.0f, 0.0f),
 			charvbo, charvao);
 
@@ -572,4 +574,125 @@ void RenderText(Shader &s, std::string text, GLfloat x, GLfloat y, GLfloat scale
 	}
 	glBindVertexArray(0);
 	glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+void classicBug(GLFWwindow* window)
+{
+	//一个点
+	GLfloat vert[] = {0.0f, 0.0f, 0.0f};
+	GLuint vbo, vao;
+	glGenBuffers(1, &vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vert), vert, GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glGenVertexArrays(1, &vao);
+
+	GLuint ndcvbo, ndcvao;
+	glGenBuffers(1, &ndcvbo);
+	glBindBuffer(GL_ARRAY_BUFFER, ndcvbo);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vert), nullptr, GL_DYNAMIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glGenVertexArrays(1, &ndcvao);
+	glBindVertexArray(0);
+
+	const char* vspath = "E:\\GitHub\\LearnOpenGL\\OpenGL\\OpenGL\\AdvancedOpenGL\\shaders\\bug\\coorvs.vs";
+	const char* fspath = "E:\\GitHub\\LearnOpenGL\\OpenGL\\OpenGL\\AdvancedOpenGL\\shaders\\bug\\coorfs.fs";
+	const char* charvs = "E:\\GitHub\\LearnOpenGL\\OpenGL\\OpenGL\\AdvancedOpenGL\\shaders\\bug\\pointvs.vs";
+	const char* charfs = "E:\\GitHub\\LearnOpenGL\\OpenGL\\OpenGL\\AdvancedOpenGL\\shaders\\bug\\pointfs.fs";
+
+	Shader shader(vspath, fspath);
+	Shader charshader(charvs, charfs);
+	shader.use();
+	charshader.use();
+
+	glm::mat4 projection = glm::ortho(-SCR_WIDTH / 2, SCR_WIDTH / 2,
+		-SCR_HEIGHT / 2, SCR_HEIGHT / 2, 1.0f, 500.0f);
+
+	glm::mat4 view;
+
+	glm::mat4 model(1.0f);
+	model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
+
+	GLuint ubo;
+	glGenBuffers(1, &ubo);
+	glBindBuffer(GL_UNIFORM_BUFFER, ubo);
+	glBufferData(GL_UNIFORM_BUFFER, 2 * sizeof(glm::mat4), nullptr, GL_STATIC_DRAW);
+	glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(glm::mat4),
+		glm::value_ptr(projection));
+	glBufferSubData(GL_UNIFORM_BUFFER, sizeof(glm::mat4), sizeof(glm::mat4),
+		glm::value_ptr(model));
+
+	////uniform缓冲区绑定点
+	//glBindBuffer(GL_UNIFORM_BUFFER, ubo);
+	//GLuint bindingPoint = 1;
+	//glBindBufferRange(GL_UNIFORM_BUFFER, bindingPoint,
+	//	ubo, 0, 2 * sizeof(glm::mat4));
+	//glUniformBlockBinding(shader.ID,
+	//	glGetUniformBlockIndex(shader.ID, "Matrices"), bindingPoint);
+	//glBindBuffer(GL_UNIFORM_BUFFER, 0);
+
+	while (!glfwWindowShouldClose(window))
+	{
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		float radius = 100.0f;
+		float camX = sin(glfwGetTime()) * radius;
+		float camZ = cos(glfwGetTime()) * radius;
+		view = glm::lookAt(glm::vec3(100, 0.0f, 100.0f),//相机位置
+			glm::vec3(0.0f, 0.0f, 0.0f), //相机观察方向--目标
+			glm::vec3(0.0f, 1.0f, 0.0f));//相机上轴
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(camX, 0.0f, 0.0f));
+		shader.use();
+		GLint viewLoc = glGetUniformLocation(shader.ID, "view");
+		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+		glUniformMatrix4fv(glGetUniformLocation(shader.ID, "projection"), 
+			1, GL_FALSE, glm::value_ptr(projection));
+		glUniformMatrix4fv(glGetUniformLocation(shader.ID, "model"),
+			1, GL_FALSE, glm::value_ptr(model));
+		//std::cout << projection[1][1] << "\n";
+
+		//画原始点
+		//glBindBuffer(GL_UNIFORM_BUFFER, ubo);
+		glBindBuffer(GL_ARRAY_BUFFER, vbo);
+		glBindVertexArray(vao);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat)/*步长*/, (void*)0);//解释缓存数据
+		glEnableVertexAttribArray(0);//属性0
+		glPointSize(5.0f);
+		glDrawArrays(GL_POINTS, 0, 1);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glBindVertexArray(0);
+
+		//画平移之后的点
+		//计算刻度像素
+		glm::vec4 ndc = projection * view * model * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+		//计算像素
+		float x = (SCR_WIDTH * 0.5f - 0.5f) * (ndc[0] + ndc[3]);
+		float y = (SCR_HEIGHT * 0.5f - 0.5f) * (ndc[3] - ndc[1]);
+		//设置投影矩阵--把像素转化为ndc坐标
+		y = y + 10.0f;//平移10个像素
+		//重新计算NDC
+		float ndcx = 2.0f / (SCR_WIDTH - 1) * x - 1;
+		float ndcy = 1 - 2.0f / (SCR_HEIGHT - 1) * y;
+
+		charshader.use();
+		float ndcvert[] = {ndcx, ndcy, 0.0f};
+		glBindBuffer(GL_ARRAY_BUFFER, ndcvbo);
+		glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(ndcvert), ndcvert);
+		glBindVertexArray(ndcvbo);
+		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
+		glPointSize(5.0f);
+		glDrawArrays(GL_POINTS, 0, 1);
+
+
+
+		//所有工作都做完了，交换缓冲区，显示绘图
+		glfwSwapBuffers(window);
+		glfwPollEvents();
+	}
+	glfwDestroyWindow(window);
+
+
 }
